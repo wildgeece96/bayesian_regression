@@ -35,7 +35,7 @@ def base_gauss(x, M=5, seed=42, mu=None):
     else:
         M = mu.shape[0]//d
     x_tile = np.tile(x, (1,M))
-    Phi = -(x_tile-mu)**2/2
+    Phi = np.exp(-(x_tile-mu)**2/2)
     return Phi, mu
 
 def bayesian_regression(X, y, base_mode='polynomial',M=5, w_S=None, w_m=None, mu=None,beta=1e0):
@@ -46,7 +46,8 @@ def bayesian_regression(X, y, base_mode='polynomial',M=5, w_S=None, w_m=None, mu
         y : 1d-array(N,). 教師データ
         base_mode: {'polynomial', 'gauss'}. 基底関数の種類
         M : 各説明変数に対して何個ずつ基底関数を生成するか.
-        mu : ガウス分布を基底関数として使うときの各々の分布の平均値
+        mu : ガウス分布を基底関数として使うときの各々の分布の平均値
+        beta: 精度(分散の逆数)
     return:
         wm_list : 2d-array.((Mxd), 1)のlist. 重みベクトルの期待値のリスト
         wS_list : 2d-array.((Mxd), (Mxd))のlist. 重みベクトルの分散のリスト
@@ -88,4 +89,4 @@ def bayesian_regression(X, y, base_mode='polynomial',M=5, w_S=None, w_m=None, mu
         wm_list.append(w_m)
         S_list.append(S)
         m_list.append(m)
-    return wS_list,wm_list,S_list,m_list  
+    return wS_list,wm_list,S_list,m_list
