@@ -9,6 +9,9 @@ argparse
 ```
 
 ## usage
+```
+$git clone https://github.com/wildgeece96/bayesian_regression  
+```
 ガウス基底関数を使う場合
 ```
 $python3 main.py --M 40 --mode gauss
@@ -19,4 +22,4 @@ $python3 main.py --M 40 --mode gauss
 $python3 main.py --M 6 --mode polynommial
 ```
 
-結果は`fig`フォルダ内に作られます。  
+結果は`fig`フォルダ内に作られます。  
